@@ -1,0 +1,52 @@
+fstream fout;
+	string username, password, name, gender;
+	int age, height;
+	float weight;
+	//sprawdzenie czy taki plik juz powstał
+	ifstream ip("users.csv");
+	
+	cout << "Wpisz swoje login: "; cin >> username; 
+	fout.open("users.csv");
+	//sprawdzenie czy taki użytkownik już istnieje
+	if (!ip.is_open()) cout << "File open" << endl;
+	string field = "_";
+	while (ip.good()) {
+		getline(ip, field, ',');
+		if (field == username) {
+			cout << "Uzytkownik: "<<field<<" juz istnieje. Jego haslo to: ";
+			getline(ip, field, ',');
+			cout << field << endl;
+			ip.close();
+			return;
+		}
+	}
+	ip.close();
+
+	/*fout.open(username + ".csv");
+	if (fout) {
+		cout << "Taki uzytkownik juz istnieje, sproboj ponownie\n";
+		system("pause");
+		return;
+	}
+	fout.close();*/
+	cout << "Wpisz swoje haslo: "; cin >> password;
+	cout << "Wpisz swoje imie: "; cin >> name;
+	cout << "Wpisz swoja plec: "; cin >> gender;
+	cout << "Wpisz swoj wiek: "; cin >> age;
+	cout << "Wpisz swoj wzrost: "; cin >> height;
+	cout << "Wpisz swoja wage: "; cin >> weight;
+
+	// Insert the data to file
+	fout << username << ", " << password << ", " << name << ", " << gender << ", " << age << ", " << height << ", " << weight << "\n";				
+	fout.close();
+
+	//fout.open(username + ".csv");
+	//if (fout) {
+		cout << "Zarejestrowano pomyslnie\n";
+		system("pause");
+	//	fout.close();
+	//}
+	//else {
+	//	cout << "Rejestracja nieprawidlowa\n";
+	//}
+	
